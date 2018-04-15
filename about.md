@@ -4,12 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Aerospace engineer with a focus in guidance and navigation of aeronautical and aerospace systems. This page is to serve as a personal code respository, as well as a medium to write about various GN&C topics, homework problems, and general engineering applications. 
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+Feel free to reach out to me with any comments or questions regarding posts on this blog.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[lucascarter0@gmail.com](mailto:lucascarter0@gmail.com)
