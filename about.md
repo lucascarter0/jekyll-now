@@ -4,12 +4,14 @@ title: About
 permalink: /about/
 ---
 
-Aerospace engineer with a focus in guidance and navigation of aeronautical and aerospace systems. This page is to serve as a personal code respository, as well as a medium to write about various GN&C topics, homework problems, and general engineering applications. 
+I am an Aerospace Engineer with a career focus in guidance, navigation, and control of aerospace systems. My focus areas include tactical missile GN&C, modeling and simulation, and statistical data analysis for engineering applications, but also take in interest in autonomous systems, machine learning, and general data analysis.
+
+This page is intended to serve as a medium to write about various GN&C topics, homework problems, and general engineering applications that interest me, as well as a personal code respository.
 
 ### More Information
 
-Feel free to reach out to me with any comments or questions regarding posts on this blog.
+Feel free to reach out with any comments or questions regarding posts or scripts in this blog.
 
-### Contact me
+### Contact
 
 [lucascarter0@gmail.com](mailto:lucascarter0@gmail.com)
