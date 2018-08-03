@@ -11,8 +11,6 @@ In this hypothetical situation, a customer is designing a high-speed train. The 
 
 __The problem:__ Using available sensors, we want to determine a navigation estimate that accurately determines train velocity within a set error requirement.
 
-The train is equipped with the following hardware: one accelerometer, and one Doppler radar sensor. 
+The train is equipped with the following hardware: one accelerometer, and one Doppler velocimeter. 
 
    $$ f(x|\theta) = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{2}+\frac{\theta}{4})^{x_1}(\frac{1}{4}(1-\theta))^{x_2}(\frac{1}{4}(1-\theta))^{x_3}(\frac{\theta}{4})^{x_4} $$
-
-
