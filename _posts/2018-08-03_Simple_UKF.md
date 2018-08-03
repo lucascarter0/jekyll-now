@@ -3,7 +3,7 @@ layout: post
 title: Simple Application of an Unscented Kalman Filter for Navigation
 ---
 
-The following is a very simple example showcasing the ease and effectiveness of implementing a UKF to improve a navigation solution.
+The following is a very simple example showcasing the effectiveness of implementing a UKF to improve a navigation solution.
 
 ***
 
