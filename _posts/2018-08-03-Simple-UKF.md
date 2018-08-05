@@ -35,6 +35,6 @@ The customer has requested the following design constraints:
 
 The ideal execution of this controller would resemble Figure 2. The vehicle accelerates quickly to its desired velocity, and maintains that velocity until it reaches the end of the manuever ($t_{end}$) with no error.
 
-![Fig 2. Ideal Execution]({{ site.baseurl }}/images/tain_fbd.png)
+![Fig 2. Ideal Execution]({{ site.baseurl }}/images/train_fbd.png)
 
 
