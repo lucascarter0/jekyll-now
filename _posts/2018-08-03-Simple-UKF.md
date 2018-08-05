@@ -13,7 +13,7 @@ __Objective:__ Determine an accurate navigation estimate maintain the train's ve
 
 __Defining the System (Given Information):__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
 
-![Fig 1. Train Free Body Diagram]({{ "/images/tain_fbd.png" | site.baseurl }})
+![Fig 1. Train Free Body Diagram]({{ site.baseurl }}/images/train_fbd.png)
 
 The train's speed is adjusted with a proportional controller. It computes an acceleration command based on velocity error:
 
@@ -35,6 +35,6 @@ The customer has requested the following design constraints:
 
 The ideal execution of this controller would resemble Figure 2. The vehicle accelerates quickly to its desired velocity, and maintains that velocity until it reaches the end of the manuever ($t_{end}$) with no error.
 
-![Fig 2. Ideal Execution]({{ site.baseurl }}/images/train_fbd.png)
+![Fig 2. Ideal Execution]({{ site.baseurl }}/images/train_ideal.png "Fig 2. Ideal Execution")
 
 
