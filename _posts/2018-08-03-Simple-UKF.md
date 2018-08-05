@@ -25,15 +25,15 @@ $$ \dot{v_t} = K(v_{desired} - v_t) - C_D*v_t $$
 
 The customer has requested the following design constraints:
 
-| Parameter              | Value         |
-| -----------------------|:-------------:|
-| $v_{desired}$          | 50 m/s        |
-| $t_{end}$              | 100 seconds   |
-| Max Error at $t_{end}$ | 2 m/s         |
-| $K$                    | 0.35          |
-| $C_D$                  | 0.00001       |
+| Parameter | Value | 
+| --- | --- |
+| $v_{desired}$ | 50 m/s |
+| $t_{end}$ | 100 seconds |
+| Max Error at $t_{end}$ | 2 m/s |
+| $K$  | 0.35 | 
+| $C_D$ | 0.00001 | 
 
-The ideal execution of this controller should resemble Figure 2. The vehicle accelerates quickly to its desired velocity and maintains that it until it reaches the end of the manuever ($t_{end}$).
+The ideal execution of this controller would resemble Figure 2. The vehicle accelerates quickly to its desired velocity, and maintains that velocity until it reaches the end of the manuever ($t_{end}$) with no error.
 
 ![Fig 2. Ideal Execution]({{ site.baseurl }}/images/tain_fbd.png)
 
