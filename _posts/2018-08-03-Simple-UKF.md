@@ -11,11 +11,15 @@ In this hypothetical situation, a customer is designing a high-speed train. In t
 
 __Objective:__ Determine an accurate navigation estimate to maintain the train's desired velocity.
 
-__Available information:__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration using a proprotional controller with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
+__Available information:__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
 
-![Train Free Body Diagram](https://raw.githubusercontent.com/lucascarter0/lucascarter0.github.io/master/images/tain_fbd.png)
+![Train Free Body Diagram]({{ site.baseurl }}/images/tain_fbd.png)
 
-The
+The train's speed is adjusted with a proportional controller. It computes an acceleration command based on velocity error:
+
+$$ a_{commanded} = K*(v_{desired} - v_{current}) $$
+
+where $K$ is a gain parameter.
 
 The train is equipped with the following hardware: one accelerometer, and one Doppler velocimeter. 
 
