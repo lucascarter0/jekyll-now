@@ -24,6 +24,7 @@ where $K$ is a gain parameter and $t$ is the given time. There are no other cons
 $$ \dot{v_t} = K(v_{desired} - v_t) - C_D*v_t $$
 
 The customer has requested the following design constraints:
+
 | Parameter              | Value         |
 | -----------------------|:-------------:|
 | $v_{desired}$          | 50 m/s        |
