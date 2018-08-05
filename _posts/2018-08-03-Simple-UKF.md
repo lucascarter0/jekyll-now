@@ -3,13 +3,17 @@ layout: post
 title: Simple Application of an Unscented Kalman Filter for Navigation
 ---
 
-The following is a very simple example showcasing the effectiveness of implementing a UKF to improve a navigation solution.
+The following is a very simple example showcasing an effective Unscented Kalman Filter implementation to improve a navigation solution.
 
 ***
 
-In this hypothetical situation, a customer is designing a high-speed train. The train travels along a frictionless rail in one dimension, perpendicular to gravity, and the only external force acting upon the train is aerodynamic drag. In this initial design phase, the goal is to have the train accelerate to a defined velocity, and maintain that velocity for a set time. The train is running autonomously, and will adjust its acceleration based on a navigation estimate that is computed onboard. 
+In this hypothetical situation, a customer is designing a high-speed train. In this initial design phase, the goal is to have the train maintain a defined velocity for a set time. The train is running autonomously, adjusting its acceleration based on an estimated velocity that is computed onboard. 
 
-__The problem:__ Using available sensors, we want to determine a navigation estimate that accurately determines train velocity within a set error requirement.
+__Objective:__ Determine an accurate navigation estimate to maintain the train's desired velocity.
+
+__Available information:__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, and the only external force acting upon the train is aerodynamic drag. The train adjusts its acceleration using a proprotional controller with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
+
+![_config.yml]({{ site.baseurl }}/images/tain_fbd.png)
 
 The train is equipped with the following hardware: one accelerometer, and one Doppler velocimeter. 
 
