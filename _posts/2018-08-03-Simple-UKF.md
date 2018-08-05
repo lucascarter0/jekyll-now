@@ -9,18 +9,31 @@ The following is a very simple example showcasing an effective Unscented Kalman 
 
 In this hypothetical situation, a customer is designing a high-speed train. In this initial design phase, the goal is to have the train maintain a defined velocity for a set time. The train is running autonomously, adjusting its acceleration based on an estimated velocity that is computed onboard. 
 
-__Objective:__ Determine an accurate navigation estimate to maintain the train's desired velocity.
+__Objective:__ Determine an accurate navigation estimate maintain the train's velocity within a maximum error at the end of its cruise manuever.
 
-__Available information:__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
+__Defining the System (Given Information):__ The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer.
 
 ![Train Free Body Diagram]({{ site.baseurl }}/images/tain_fbd.png)
 
 The train's speed is adjusted with a proportional controller. It computes an acceleration command based on velocity error:
 
-$$ a_{commanded} = K*(v_{desired} - v_{current}) $$
+$$ a_{commanded} = K(v_{desired} - v_{t}) $$
 
-where $K$ is a gain parameter.
+where $K$ is a gain parameter and $t$ is the given time. There are no other constraints or design requirements on the controller. The acceleration of the vehicle due to drag is proportional to the train's current velocity by a drag parameter $C_D$. Combining the controller and system dynamics, the governing equation of the train's velocity is:
 
-The train is equipped with the following hardware: one accelerometer, and one Doppler velocimeter. 
+$$ \dot{v_t} = K(v_{desired} - v_t) - C_D*v_t $$
 
-   $$ f(x|\theta) = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{2}+\frac{\theta}{4})^{x_1}(\frac{1}{4}(1-\theta))^{x_2}(\frac{1}{4}(1-\theta))^{x_3}(\frac{\theta}{4})^{x_4} $$
+The customer has requested the following design constraints:
+| Parameter              | Value         |
+| -----------------------|:-------------:|
+| $v_{desired}$          | 50 m/s        |
+| $t_{end}$              | 100 seconds   |
+| Max Error at $t_{end}$ | 2 m/s         |
+| $K$                    | 0.35          |
+| $C_D$                  | 0.00001       |
+
+The ideal execution of this controller should resemble Figure 2. The vehicle accelerates quickly to its desired velocity and maintains that it until it reaches the end of the manuever ($t_{end}$).
+
+![Ideal Execution]({{ site.baseurl }}/images/tain_fbd.png)
+
+
