@@ -27,15 +27,17 @@ The customer has requested the following design constraints:
 
 | Parameter | Value | 
 | --- | --- |
-| $v_{desired}$ | 50 m/s |
-| $t_{end}$ | 100 seconds |
+| $v_{desired}$ | 50 m/s      |
+| $t_{end}$     | 100 seconds |
 | Max Error at $t_{end}$ | 2 m/s |
-| $K$  | 0.35 | 
-| $C_D$ | 0.00001 | 
+| $K$           | 0.35 | 
+| $C_D$         | 0.00001 | 
 
 The ideal execution of this manuever would resemble Figure 2. The vehicle accelerates quickly to its desired velocity, and maintains that velocity until it reaches the end of the manuever ($t_{end}$) with no error. ![Fig 2. Ideal Execution]({{ site.baseurl }}/images/train_ideal.png "Fig 2. Ideal Execution")
 
 ## Tracking Velocity
 To track the train's velocity, we will start with an accelerometer aligned along the axis of train motion. The accelerometer will measure changes in velocity at a rate of 100 Hz, and its integrated measurements will be used by the controller.
 
-   The problem with this is that all accelerometers are subject to random errors, and these errors will accumulate over time when integrated. If we continue using our governing equation with no way to account for these errors, the navigation estimate will assume it is maintaining the desired velocity, while in reality the true velocity is deviating due to error.
+The problem with this is that all accelerometers are subject to random errors, and these errors will accumulate over time when integrated. If we continue using our governing equation with no way to account for these errors, the train's onboard computer will assume it is maintaining the desired velocity, while in reality the true velocity is deviating due to error, as seen in the figure below. 
+
+![Fig 3. Error Propagation]({{ site.baseurl }}/images/train_imuOnly.png "Fig 3. Error Propagation in System")
