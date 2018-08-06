@@ -10,7 +10,7 @@ The following is a very simple example showcasing an effective Unscented Kalman 
 In this hypothetical situation, a customer is designing a high-speed train. In this initial design phase, the goal is to have the train maintain a defined velocity for a set time. The train is running autonomously, adjusting its acceleration based on an estimated velocity that is computed onboard. 
 
 ## Objective
-Determine an accurate navigation estimate maintain the train's velocity within a maximum error at the end of its cruise manuever.
+Determine an accurate navigation estimate to maintain the train's velocity within a maximum error at the end of its cruise manuever.
 
 ## Defining the System (Given Information)
 The train travels along a frictionless rail in one dimension, perpendicular to gravity, with aerodynamic drag being the only external force acting on the vehicle. The train adjusts its acceleration with perfect actuation, meaning the train executes the exact acceleration command returned from the onboard computer. ![Fig 1. Train Free Body Diagram]({{ site.baseurl }}/images/train_fbd.png "Fig 1. Train Free-Body Diagram")
@@ -36,6 +36,6 @@ The customer has requested the following design constraints:
 The ideal execution of this manuever would resemble Figure 2. The vehicle accelerates quickly to its desired velocity, and maintains that velocity until it reaches the end of the manuever ($t_{end}$) with no error. ![Fig 2. Ideal Execution]({{ site.baseurl }}/images/train_ideal.png "Fig 2. Ideal Execution")
 
 ## Tracking Velocity
-To track the train's velocity, we will start with an accelerometer aligned along the axis of motion of the train. The accelerometer will measure changes in velocity every 100 Hz, and these measurements can be integrated 
+To track the train's velocity, we will start with an accelerometer aligned along the axis of train motion. The accelerometer will measure changes in velocity at a rate of 100 Hz, and its integrated measurements will be used by the controller.
 
-
+   The problem with this is that all accelerometers are subject to random errors, and these errors will accumulate over time when integrated. If we continue using our governing equation with no way to account for these errors, the navigation estimate will assume it is maintaining the desired velocity, while in reality the true velocity is deviating due to error.
