@@ -44,5 +44,7 @@ The problem with this is that all accelerometers are subject to random errors, a
 
 ## Implementing a New Navigation Strategy
 We will minimize the final velocity error in two ways:
-1. Attempt to account for the accelerometer error in the system model
+1. Attempt to account for the accelerometer error in the navigation estimate
 2. Fuse the accelerometer information with an additional sensor
+
+This particular accelerometer is subject to a scale factor on the measured value, plus a random bias. This means that th
