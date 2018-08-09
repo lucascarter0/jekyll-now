@@ -47,6 +47,6 @@ We will minimize the final velocity error in two ways:
 1. Attempt to account for the accelerometer error in the navigation estimate
 2. Fuse the accelerometer information with an additional sensor
 
-Error for this particular accelerometer can be completely modeled by a scale factor on the measured measured value, a walking bias, and a Gaussian white noise. Defining these terms:
+Error for this particular accelerometer can be completely modeled by a scale factor $s$ on the measured measured value, a walking bias $b$, and a Gaussian white noise $\eta$. Defining equations for each of these terms:
 
-$$ $$
+$$ \dot{b}_t = \frac{-b}{\tau} + w_b $$
