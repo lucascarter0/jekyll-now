@@ -47,4 +47,6 @@ We will minimize the final velocity error in two ways:
 1. Attempt to account for the accelerometer error in the navigation estimate
 2. Fuse the accelerometer information with an additional sensor
 
-This particular accelerometer is subject to a scale factor on the measured value, plus a random bias. This means that th
+Error for this particular accelerometer can be completely modeled by a scale factor on the measured measured value, a walking bias, and a Gaussian white noise. Defining these terms:
+
+$$ $$
