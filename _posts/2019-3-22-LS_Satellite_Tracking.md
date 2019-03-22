@@ -94,33 +94,12 @@ It is shown by the figure that the position error magnitude quickly converges af
 
 ## Conclusion ##
 
-While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [^4]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [^5]. As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
-
-__References__
+  While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. 
+  Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [^4]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [^5]. 
+  As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
 
 [^1]: Chen, Bai, Liang, Li, Orbital Data Applications for Space Objects, Springer, Singapore, 2017, Ch 2.
 [^2]: Vallado, Fundamentals of Astrodynamics and Applications, 4th Edition, Microcosm Press, Hawthorne, CA, 2013, pp. 731-776.
 [^3]: Noble, Daniel, Applied Linear Algebra, 3rd Edition, Prentice Hall, New Jersey, 1998, Ch 2.6.6
 [^4]: Long, Cappellari Jr., Velez, Fuchs, “Goddard Trajectory Determination System Mathematical Theory”, NASA document X582-76-77, 1989.
 [^5]: M. K. El-Mahy, "Efficient satellite orbit determination algorithm," Proceedings of the Eighteenth National Radio Science Conference, Vol. 1, 2001, pp. 225-232.
-
-
-
-Instead of solving parts 1 and 2 separately, I will cut to the chase and say that part 2 can be easily solved by proving 1. Showing that this vector is an exponential family is just an exercise in algebra. Using the four cell probabilities above, the multinomial distribution can be constructed as:  
-   $$ f(x|\theta) = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{2}+\frac{\theta}{4})^{x_1}(\frac{1}{4}(1-\theta))^{x_2}(\frac{1}{4}(1-\theta))^{x_3}(\frac{\theta}{4})^{x_4} $$
-
-To solve, rewrite the distribution to match the form of an exponential family:  
-
-   $ = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{4})^{n}(2+\theta)^{x_1}(1-\theta)^{x_2}(1-\theta)^{x_3}\theta^{x_4} $
-   $ = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{4})^{n}\exp\[x_1\log (2+\theta) + x_2\log (1-\theta) + x_3\log (1-\theta) + x_4 \log \theta\] $
-   $ = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{4})^{n}\exp\[(n- x_1 - x_4)\log (1-\theta) + x_1\log(2+\theta) + x_4\log \theta\] $
-   $ = \frac{n!}{x_1!x_2!x_3!x_4!}(\frac{1}{4})^{n}(1-\theta)^n\exp\[x_1\log (\frac{2+\theta}{1-\theta})+x_4\log (\frac{\theta}{1-\theta})\] $
-
-Once simplified, it can be seen that this distribution matches the form  
-$ f(x|\theta) = c(\theta)h(x)exp\[\sum_{j=1}^{k} w_j(\theta)T_j(x)\] $  
-with  
-$ c(\theta) = (1-\theta)^n,  h(x) = \frac{n!}{x_1!x_2!x_3!x_4!} $  
-$ w_1(\theta) = \log (\frac{2+\theta}{1-\theta}),  T_1(x) = x_1 $  
-$ w_2(\theta) = \log (\frac{\theta}{1-\theta}),  T_2(x) = x_4 $
-
-Since $f(x)$ is an exponential family, the statistic $ T(x) = (x_1,x_4) $ is sufficient for \theta. 
