@@ -10,9 +10,17 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 ## Introduction ##
 
-  While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state x, consisting of an inertially-referenced position and velocity, is required.
+  While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state $x$, consisting of an inertially-referenced position and velocity, is required.
 
-$$ 
+$$ \boldsymbol{x} = [\begin{bmatrix}
+r_I\\
+r_J\\
+r_K\\
+r_I\\
+r_J\\
+r_K
+\end{bmatrix}\] $$
+
 
 Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors within these methods cause the estimate to deviate from the true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this paper presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
@@ -22,33 +30,33 @@ This section describes the construction of each element of the least squares app
 
 Consider a linear system of the form
 
-$$
+$$ $$
 
 where $y$ represents a size $p$ x 1 column matrix of observation data, $x$ represents a $q$ x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a $p$ x $q$ matrix of the system model relating parameters of interest to the observed data. The least squares method seeks to minimize the residual error 
 
-$$
+$$ $$
 
 between estimated parameters and observed data to determine an optimal estimate so that
 
-$$
+$$ $$
 
 Noble and Daniel [^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
-$$
+$$ $$
 
 meaning that once observation and system model matrices are defined, least squares can be used to find an approximation of the system parameters. In the case of the system model $A$ being composed of nonlinear relationships to the measured observations, an approximation of the system must be used to estimate parameters using linear techniques. The estimated observation $Ax$ can be linearized about a nominal state using a first order Taylor series. At some time $t_i$, the computed observation can be approximated by
 
-$$
+$$ $$
 
 where $y_0$ indicates the nominal observation estiamte at time $t_0$, the partial differential term describes how the nominal state is changing with respect to the estimated parameters, and $\deltax_i$ represents a change in the estimated parameters from time $t_0$ to $t_I$. Substituting this approximation back into the least squares system described previously, at some time $t_i$, 
 
-$$
-$$
-$$
+$$ $$
+$$ $$
+$$ $$
 
 Arranged in this form, it is quickly seen that the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix consists of residual error, and the paramaters being estimated are based on a partial differential relationship to the nominal state.
 
-$$
+$$ $$
 
 This means that in the application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
 
@@ -60,7 +68,7 @@ There are various approaches to measuring a satellite’s position from a ground
 
 Previously it was shown that for a linear approximation of a nonlinear system, the observation vector is composed of residual values, meaning that the difference of each measurement from the nominal estimate is used to construct the observation vector. Since the satellite is actively moving over time, incremental measurements from the starting epoch time $t_0$ are summed to time $t_i$ to create the residual observation matrix.
 
-$$
+$$ $$
 
 ##### B. Model Matrix #####
 
