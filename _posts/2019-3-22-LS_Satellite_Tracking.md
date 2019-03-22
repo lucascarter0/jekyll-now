@@ -12,14 +12,14 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
   While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state $x$, consisting of an inertially-referenced position and velocity, is required.
 
-$$ \boldsymbol{x} = [\begin{bmatrix}
+$$ \boldsymbol{x} = \begin{bmatrix}
 r_I\\
 r_J\\
 r_K\\
 r_I\\
 r_J\\
 r_K
-\end{bmatrix}\] $$
+\end{bmatrix} $$
 
 
 Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors within these methods cause the estimate to deviate from the true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this paper presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
