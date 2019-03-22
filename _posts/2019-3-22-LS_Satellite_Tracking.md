@@ -14,7 +14,7 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 $$ 
 
-Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors within these methods cause the estimate to deviate from the true state [1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this paper presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
+Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors within these methods cause the estimate to deviate from the true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this paper presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
 ## Construction of the Least Squares Problem ## 
 
@@ -32,7 +32,7 @@ between estimated parameters and observed data to determine an optimal estimate 
 
 $$
 
-Noble and Daniel [2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
+Noble and Daniel [^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
 $$
 
@@ -69,7 +69,7 @@ The model matrix $A$ describes the relationship between observation vector and e
 $$ Jacobian $$
 ### Jacobian calculated analytically ###
 
-These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [3].
+These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [^3].
 
 ## Implementation ##
 
@@ -94,15 +94,15 @@ It is shown by the figure that the position error magnitude quickly converges af
 
 ## Conclusion ##
 
-While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [4]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [5]. As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
+While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [^4]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [^5]. As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
 
 __References__
 
-[1] Chen, Bai, Liang, Li, Orbital Data Applications for Space Objects, Springer, Singapore, 2017, Ch 2.
-[2] Vallado, Fundamentals of Astrodynamics and Applications, 4th Edition, Microcosm Press, Hawthorne, CA, 2013, pp. 731-776.
-[3] Noble, Daniel, Applied Linear Algebra, 3rd Edition, Prentice Hall, New Jersey, 1998, Ch 2.6.6
-[4] Long, Cappellari Jr., Velez, Fuchs, “Goddard Trajectory Determination System Mathematical Theory”, NASA document X582-76-77, 1989.
-[5] M. K. El-Mahy, "Efficient satellite orbit determination algorithm," Proceedings of the Eighteenth National Radio Science Conference, Vol. 1, 2001, pp. 225-232.
+[^1]: Chen, Bai, Liang, Li, Orbital Data Applications for Space Objects, Springer, Singapore, 2017, Ch 2.
+[^2]: Vallado, Fundamentals of Astrodynamics and Applications, 4th Edition, Microcosm Press, Hawthorne, CA, 2013, pp. 731-776.
+[^3]: Noble, Daniel, Applied Linear Algebra, 3rd Edition, Prentice Hall, New Jersey, 1998, Ch 2.6.6
+[^4]: Long, Cappellari Jr., Velez, Fuchs, “Goddard Trajectory Determination System Mathematical Theory”, NASA document X582-76-77, 1989.
+[^5]: M. K. El-Mahy, "Efficient satellite orbit determination algorithm," Proceedings of the Eighteenth National Radio Science Conference, Vol. 1, 2001, pp. 225-232.
 
 
 
