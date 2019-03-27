@@ -44,9 +44,13 @@ $$
 \ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} \\
 $$
 
-Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix consists of residual error, and the paramaters being estimated are based on a partial differential relationship to the nominal state.
+Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix of residual error and the paramaters being estimated are related by a partial differential relationship to the nominal state, also referred to as a Jacobian matrix.
 
-$$ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_i = (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}$$
+$$ 
+\(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_i = (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
+\ \boldsymbol{J}(\boldsymbol{x})\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i = boldsymbol{J}(\boldsymbol{x})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
+\ \boldsymbol{y}_i = \boldsymbol{y}_{0} + \\
+$$
 
 This means that in the application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
 
