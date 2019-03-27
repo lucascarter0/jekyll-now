@@ -14,7 +14,7 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 $$ \boldsymbol{x} = \begin{bmatrix}r_I\\r_J\\r_K\\r_I\\r_J\\r_K\end{bmatrix} $$
 
-  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state^[^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
+  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state[^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
 ## Construction of the Least Squares Problem ## 
 
@@ -28,7 +28,7 @@ where $y$ represents a size p x 1 column matrix of observation data, $x$ represe
 
 $$ min f(x) = \|\| \boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
-Noble and Daniel^[^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
+Noble and Daniel[^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
 $$ \boldsymbol{A}^{T}\boldsymbol{A} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
