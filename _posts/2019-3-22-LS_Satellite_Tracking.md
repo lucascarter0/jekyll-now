@@ -14,7 +14,7 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 $$ \boldsymbol{x} = \begin{bmatrix}r_I\\r_J\\r_K\\r_I\\r_J\\r_K\end{bmatrix} $$
 
-  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
+  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state^[^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
 ## Construction of the Least Squares Problem ## 
 
@@ -26,9 +26,9 @@ $$ \boldsymbol{y} = \boldsymbol{A}\boldsymbol{x} $$
 
 where $y$ represents a size p x 1 column matrix of observation data, $x$ represents a q x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a p x q matrix of the system model relating parameters of interest to the observed data. The least squares method seeks to minimize the residual error between the estimated parameters and the observed data.
 
-$$ min f(x) = \|\|\ boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
+$$ min f(x) = \|\| \boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
-Noble and Daniel [^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
+Noble and Daniel^[^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
 $$ \boldsymbol{A}^{T}\boldsymbol{A} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
@@ -36,15 +36,17 @@ meaning that once observation and system model matrices are defined, least squar
 
 $$ \boldsymbol{y}_{c_{i}} = \boldsymbol{A}\boldsymbol{x}_{i} = \boldsymbol{y}_{0} + \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
 
-where $y_0$ indicates the nominal observation estiamte at time $t_0$, the partial differential term describes how the nominal state is changing with respect to the estimated parameters, and $\deltax_i$ represents a change in the estimated parameters from time $t_0$ to $t_I$. Substituting this approximation back into the least squares system described previously, at some time $t_i$, 
+where $y_0$ indicates the nominal observation estiamte at time $t_0$, the partial differential term describes how the nominal state is changing with respect to the estimated parameters, and $\delta{x_i}$ represents a change in the estimated parameters from time $t_0$ to $t_I$. Substituting this approximation back into the least squares system described previously, at some time $t_i$, 
 
-$$ \boldsymbol{y}_i = \boldsymbol{y}_{c_{i}} $$
-$$ \boldsymbol{y}_i = \boldsymbol{y}_{0} + \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
-$$ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
+$$
+\ \boldsymbol{y}_i = \boldsymbol{y}_{c_{i}} \\
+\ \boldsymbol{y}_i = \boldsymbol{y}_{0} + \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} \\
+\ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} \\
+$$
 
 Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix consists of residual error, and the paramaters being estimated are based on a partial differential relationship to the nominal state.
 
-$$ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_$$
+$$ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_i = (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}$$
 
 This means that in the application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
 
