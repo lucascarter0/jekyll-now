@@ -10,12 +10,11 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 ## Introduction ##
 
-  While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state $x$, consisting of an inertially-referenced position and velocity, is required.
+  While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state $x$ is required. In the context of this analysis, satellite state consists of position $r$ and velocity $v$ referenced to an inertial reference frame with axes $I$, $J$, and $K$.
 
 $$ \boldsymbol{x} = \begin{bmatrix}r_I\\r_J\\r_K\\r_I\\r_J\\r_K\end{bmatrix} $$
 
-
-  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors within these methods cause the estimate to deviate from the true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this paper presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
+  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state [^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
 ## Construction of the Least Squares Problem ## 
 
@@ -25,17 +24,13 @@ Consider a linear system of the form
 
 $$ \boldsymbol{y} = \boldsymbol{A}\boldsymbol{x} $$
 
-where $y$ represents a size p x 1 column matrix of observation data, $x$ represents a q x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a p x q matrix of the system model relating parameters of interest to the observed data. The least squares method seeks to minimize the residual error 
+where $y$ represents a size p x 1 column matrix of observation data, $x$ represents a q x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a p x q matrix of the system model relating parameters of interest to the observed data. The least squares method seeks to minimize the residual error between the estimated parameters and the observed data.
 
-$$\|\|\ boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
-
-between estimated parameters and observed data to determine an optimal estimate so that
-
-$$ \boldsymbol{A}\boldsymbol{x} \approx \boldsymbol{y} $$
+$$ min f(x) = \|\|\ boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
 Noble and Daniel [^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
-$$ \boldsymbol{A}^{T}\boldsymbol{A} = \boldsymbol{A}^{T}\boldsymbol{y}$$
+$$ \boldsymbol{A}^{T}\boldsymbol{A} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
 meaning that once observation and system model matrices are defined, least squares can be used to find an approximation of the system parameters. In the case of the system model $A$ being composed of nonlinear relationships to the measured observations, an approximation of the system must be used to estimate parameters using linear techniques. The estimated observation $Ax$ can be linearized about a nominal state using a first order Taylor series. At some time $t_i$, the computed observation can be approximated by
 
@@ -47,7 +42,7 @@ $$ \boldsymbol{y}_i = \boldsymbol{y}_{c_{i}} $$
 $$ \boldsymbol{y}_i = \boldsymbol{y}_{0} + \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
 $$ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
 
-Arranged in this form, it is quickly seen that the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix consists of residual error, and the paramaters being estimated are based on a partial differential relationship to the nominal state.
+Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix consists of residual error, and the paramaters being estimated are based on a partial differential relationship to the nominal state.
 
 $$ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_$$
 
