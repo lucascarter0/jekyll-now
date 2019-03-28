@@ -44,31 +44,38 @@ $$
 \ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} \\
 $$
 
-Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix of residual error and the paramaters being estimated are related by a partial differential relationship to the nominal state, also referred to as a Jacobian matrix.
+Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix of residual error and the paramaters being estimated are related by a partial differential relationship to the nominal state, also referred to as a Jacobian matrix. The Gauss-Newton algorithm solves the non-linear least squares problem
 
 $$ 
 \ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_i = (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
 \ \boldsymbol{J}(\boldsymbol{x})\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i = \boldsymbol{J}(\boldsymbol{x})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
-\ \boldsymbol{y}_i = \boldsymbol{y}_{0} + (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i \\
+\ \boldsymbol{y}_i = \boldsymbol{y}_{0} - (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i  \\
 $$
 
-This means that in the application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
+In this application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
 
 ##### A. Observation Vector #####
 
-There are various approaches to measuring a satellite’s position from a ground station, but in this application, it can be assumed a ground stations measures relative satellite azimuth $\beta$, elevation $el$, and range $\rho$ from a central point of the sensor as described in Figure 1.
+There are various approaches to measuring a satellite’s position from a ground station, but in this application, it can be assumed the ground station of interest measures relative satellite azimuth $\beta$, elevation $el$, and range $\rho$ from a central point on the sensor as described in Figure 1.
 
 ## Picture of Satellite with caption ##
 
 Previously it was shown that for a linear approximation of a nonlinear system, the observation vector is composed of residual values, meaning that the difference of each measurement from the nominal estimate is used to construct the observation vector. Since the satellite is actively moving over time, incremental measurements from the starting epoch time $t_0$ are summed to time $t_i$ to create the residual observation matrix.
 
-$$ $$
+$$ \boldsymbol{y}_{i} - \boldsymbol{y}_{0} = \sum_{n=1}^{i} \boldsymbol{y}_{t} - \boldsymbol{y}_{0} $$
 
 ##### B. Model Matrix #####
 
-The model matrix $A$ describes the relationship between observation vector and estimated parameters. In the case of estimating the satellite state, it describes how relative ground-based measurements are changing with respect to the nominal estimated state. Considering each component of the observation and state matrices described previously, the $A$ matrix is expanded to 
+The Jacobian $J$ describes the relationship between observation vector and estimated parameters. In the case of estimating the satellite state, it describes how relative ground-based measurements are changing with respect to the nominal estimated state. Considering each component of the observation and state matrices described previously, the $A$ matrix is expanded to 
 
-$$ Jacobian $$
+$$ \[
+ \begin{matrix}
+  \frac{{\delta}{\rho}_{i}}{{\delta}{r}_{I_{0}}} & \frac{{\delta}{\rho}_{i}}{{\delta}{r}_{J_{0}}} & \frac{{\delta}{\rho}_{i}}{{\delta}{r}_{K_{0}}} \frac{{\delta}{\rho}_{i}}{{\delta}{v}_{I_{0}}} \frac{{\delta}{\rho}_{i}}{{\delta}{v}_{J_{0}}} \frac{{\delta}{\rho}_{i}}{{\delta}{v}_{K_{0}}} \\
+  \frac{{\delta}{\beta}_{i}}{{\delta}{r}_{I_{0}}} & \frac{{\delta}{\beta}_{i}}{{\delta}{r}_{J_{0}}} & \frac{{\delta}{\beta}_{i}}{{\delta}{r}_{K_{0}}} \frac{{\delta}{\beta}_{i}}{{\delta}{v}_{I_{0}}} \frac{{\delta}{\beta}_{i}}{{\delta}{v}_{J_{0}}} \frac{{\delta}{\beta}_{i}}{{\delta}{v}_{K_{0}}} \\
+  \frac{{\delta}{el}_{i}}{{\delta}{r}_{I_{0}}} & \frac{{\delta}{el}_{i}}{{\delta}{r}_{J_{0}}} & \frac{{\delta}{el}_{i}}{{\delta}{r}_{K_{0}}} \frac{{\delta}{el}_{i}}{{\delta}{v}_{I_{0}}} \frac{{\delta}{el}_{i}}{{\delta}{v}_{J_{0}}} \frac{{\delta}{el}_{i}}{{\delta}{v}_{K_{0}}}
+ \end{matrix}
+\] $$
+
 ### Jacobian calculated analytically ###
 
 These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [^3].
@@ -86,18 +93,18 @@ With the observation, model, and parameter terms defined, linear least squares c
 
 ## Application ##
 
-The utility of this approach was demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes.
+The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes.
 
 ### Table of GEOS-III Data ###
 
-An initial estimate of the satellite’s state was provided based on high fidelity propagations methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2.
+An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2.
 
 It is shown by the figure that the position error magnitude quickly converges after only four iterations of applying the least squares correction. With an initial position error magnitude of 250 kilometers from the propagated estimate, the least squares estimated state converges to a position error magnitude of 1.2 kilometers, greatly improving the monitoring ground station’s ability to determine any necessary corrections for the satellite.
 
 ## Conclusion ##
 
   While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. 
-  Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [^4]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [^5]. 
+  Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [[^4]]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [[^5]]. 
   As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
 
 [^1]: Chen, Bai, Liang, Li, Orbital Data Applications for Space Objects, Springer, Singapore, 2017, Ch 2.
