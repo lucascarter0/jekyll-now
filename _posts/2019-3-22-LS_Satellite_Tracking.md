@@ -30,7 +30,7 @@ $$ min f(x) = \|\| \boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
 Noble and Daniel[^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
-$$ \boldsymbol{A}^{T}\boldsymbol{A} = \boldsymbol{A}^{T}\boldsymbol{y} $$
+$$ \boldsymbol{A}^{T}\boldsymbol{A}\boldsymbol{x} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
 meaning that once observation and system model matrices are defined, least squares can be used to find an approximation of the system parameters. In the case of the system model $A$ being composed of nonlinear relationships to the measured observations, an approximation of the system must be used to estimate parameters using linear techniques. The estimated observation $Ax$ can be linearized about a nominal state using a first order Taylor series. At some time $t_i$, the computed observation can be approximated by
 
