@@ -78,7 +78,7 @@ $$ \[
 
 ### Jacobian calculated analytically ###
 
-These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [^3].
+These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [[^3]].
 
 ## Implementation ##
 
@@ -87,7 +87,7 @@ With the observation, model, and parameter terms defined, linear least squares c
   * Compute the residual observation matrix by differencing the measurement and nominal estimate.
   * Compute the model Jacobian A using analytical propagation techniques.
   * Sum each observation matrix and model matrix for every measurement to $t_i$.
-* Compute the estimated state correction term $\deltax$ by solving the least squares problem $\boldsymbol{A}^{T}\boldsymbol{A}x=\boldsymbol{A}^{T}\boldsymbol{b}$ using the cumulative observation and model matrices.
+* Compute the estimated state correction term $\delta{x}$ by solving the least squares problem $\boldsymbol{A}^{T}\boldsymbol{A}x=\boldsymbol{A}^{T}\boldsymbol{b}$ using the cumulative observation and model matrices.
 * Apply this computed correction to the nominal estimate.
 * Repeat process until nominal estimate converges to an acceptable tolerance as specified by the user.
 
