@@ -68,13 +68,11 @@ $$ \boldsymbol{y}_{i} - \boldsymbol{y}_{0} = \sum_{n=1}^{i} \boldsymbol{y}_{t} -
 
 The Jacobian $J$ describes the relationship between observation vector and estimated parameters. In the case of estimating the satellite state, it describes how relative ground-based measurements are changing with respect to the nominal estimated state. Considering each component of the observation and state matrices described previously, the $A$ matrix is expanded to 
 
-$$ \[
- \begin{matrix}
+$$ \[\begin{matrix}
   \frac{\delta{\rho}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{K_{0}}} \\
   \frac{\delta{\beta}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{K_{0}}} \\
   \frac{\delta{el}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{K_{0}}}
- \end{matrix}
-\] $$
+ \end{matrix} \] $$
 
 ### Jacobian calculated analytically ###
 
