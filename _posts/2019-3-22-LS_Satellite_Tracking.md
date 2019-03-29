@@ -14,7 +14,7 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
 $$ \boldsymbol{x} = \begin{bmatrix}r_I\\r_J\\r_K\\r_I\\r_J\\r_K\end{bmatrix} $$
 
-  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state[^1]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
+  Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state [[^1]]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
 ## Construction of the Least Squares Problem ## 
 
@@ -28,7 +28,7 @@ where $y$ represents a size p x 1 column matrix of observation data, $x$ represe
 
 $$ min f(x) = \|\| \boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
-Noble and Daniel[^2] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
+Noble and Daniel [[^2]] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
 $$ \boldsymbol{A}^{T}\boldsymbol{A}\boldsymbol{x} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
@@ -68,11 +68,13 @@ $$ \boldsymbol{y}_{i} - \boldsymbol{y}_{0} = \sum_{n=1}^{i} \boldsymbol{y}_{t} -
 
 The Jacobian $J$ describes the relationship between observation vector and estimated parameters. In the case of estimating the satellite state, it describes how relative ground-based measurements are changing with respect to the nominal estimated state. Considering each component of the observation and state matrices described previously, the $A$ matrix is expanded to 
 
-$$ \left\[ \begin{matrix}
-  \frac{\delta{\rho}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{K_{0}}} \\
-  \frac{\delta{\beta}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{K_{0}}} \\
-  \frac{\delta{el}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{K_{0}}}
- \end{matrix} \right\] $$
+$$ \[ 
+\begin{matrix}
+\frac{\delta{\rho}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\rho}_{i}}{\delta{v}_{K_{0}}} \\
+\frac{\delta{\beta}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{\beta}_{i}}{\delta{v}_{K_{0}}} \\
+\frac{\delta{el}_{i}}{\delta{r}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{r}_{K_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{I_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{J_{0}}} \frac{\delta{el}_{i}}{\delta{v}_{K_{0}}}
+\end{matrix} 
+\] $$
 
 ### Jacobian calculated analytically ###
 
