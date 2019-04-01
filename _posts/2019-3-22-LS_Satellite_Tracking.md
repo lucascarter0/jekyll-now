@@ -93,11 +93,9 @@ With the observation, model, and parameter terms defined, linear least squares c
 
 ## Application ##
 
-The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes.
+The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes. ![Fig 1. GEOS-III Tracking Data Provided by Ground Station]({{ site.baseurl }}/images/geos_iii_data.png "Fig 1. GEOS-III Tracking Data Provided by Ground Station")
 
-### Table of GEOS-III Data ###
-
-An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2.
+An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2. ![Fig 2. Convergence of least squares estimate over ten iterations. ]({{ site.baseurl }}/images/nls_satellite_iters.png "Fig 2. Convergence of least squares estimate over ten iterations.")
 
 It is shown by the figure that the position error magnitude quickly converges after only four iterations of applying the least squares correction. With an initial position error magnitude of 250 kilometers from the propagated estimate, the least squares estimated state converges to a position error magnitude of 1.2 kilometers, greatly improving the monitoring ground station’s ability to determine any necessary corrections for the satellite.
 
