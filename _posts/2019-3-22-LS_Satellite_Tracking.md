@@ -72,7 +72,7 @@ $$
 
 These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [[^3]].
 
-### Update with Analytic Technique for Calculating Jacobian from Oribt Propagation ###
+### Update with Analytic Technique for Calculating Jacobian from Orbit Propagation ###
 
 ## Implementation ##
 
