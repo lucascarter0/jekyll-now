@@ -12,7 +12,7 @@ This problem is based on a report I wrote recently for a graduate linear algebra
 
   While orbiting Earth, various forces perturb the motion of satellites, causing them to deviate from their intended path. Periodic impulses must be executed by the satellite’s control system to offset this behavior. To determine the magnitude and direction of the impulses needed to correct orbit deviations, an accurate estimate of the satellite state $x$ is required. In the context of this analysis, satellite state consists of position $r$ and velocity $v$ referenced to an inertial reference frame with axes $I$, $J$, and $K$.
 
-$$ \boldsymbol{x} = \begin{bmatrix}r_I r_J r_K r_I r_J r_K\end{bmatrix}^T $$
+$$ \boldsymbol{x} = \begin{bmatrix}r_I \  r_J  \ r_K  \ v_I  \ v_J  \ v_K\end{bmatrix}^T $$
 
   Following initial insertion into a desired orbit, propagation models are used to estimate the vehicle state over time, but modeling errors cause the estimate to deviate from the satellites' true state [[^1]]. Radar measurements from a ground-based tracking station can be used to improve this estimate. The least squares technique described in this analysis presents a method for improving upon the propagated state estimate by attempting to minimize the residual error between a sample of ground-based measurements and the predicted satellite state estimate.
 
@@ -32,7 +32,7 @@ At some time $t_i$, the computed observation can be approximated by
 
 $$ \boldsymbol{y}_{c_{i}} = \boldsymbol{A}\boldsymbol{x}_{i} = \boldsymbol{y}_{0} + \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} $$
 
-where $y_0$ indicates the nominal observation estimate at time $t_0$, the partial differential term $\frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}$ describes how the nominal state is changing with respect to the estimated parameters, and $\delta{x_i}$ represents a change in the estimated parameters from the nominal estimate to the measured time $t_I$. Substituting this approximation back into the least squares system described previously, at some time $t_i$, 
+where $y_0$ indicates the nominal observation estimate at time $t_0$, the partial differential term describes how the nominal state is changing with respect to the estimated parameters, and $\delta{x_i}$ represents a change in the estimated parameters from the nominal estimate to the measured time $t_I$. Substituting this approximation back into the least squares model, 
 
 $$
 \ \boldsymbol{y}_i = \boldsymbol{y}_{c_{i}} \\
@@ -40,15 +40,13 @@ $$
 \ \boldsymbol{y}_i - \boldsymbol{y}_{0} = \frac{\delta\boldsymbol{y}_0}{\delta\boldsymbol{x}}\Delta\boldsymbol{x}_{i} \\
 $$
 
-Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the observation matrix of residual error and the paramaters being estimated are related by a partial differential relationship to the nominal state, also referred to as a Jacobian matrix. The Gauss-Newton algorithm solves the non-linear least squares problem
+Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the measurement matrix of residual error and the estimated paramaters are related by a Jacobian matrix. The Gauss-Newton algorithm solves the non-linear least squares problem:
 
 $$ 
-\ (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})\Delta\boldsymbol{x}_i = (\frac{\delta\boldsymbol{y}_{0}}{\delta\boldsymbol{x}})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
-\ \boldsymbol{J}(\boldsymbol{x})\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i = \boldsymbol{J}(\boldsymbol{x})^{T}(\boldsymbol{y}_i - \boldsymbol{y}_{0}) \\
-\ \boldsymbol{y}_i = \boldsymbol{y}_{0} - (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\Delta\boldsymbol{x}_i  \\
+\ \Delta\boldsymbol{x}_i \approx (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\delta{\boldsymbol{y}_i}  \\
 $$
 
-In this application of least squares, the estimated parameters will be providing a correction to a nominal estimate, whereas the conventional least squares example solves for the parameters directly.
+It's important to note that the estimated parameters will be correcting the nominal estimate, whereas the linear least squares example solves for the parameters directly. Using a sample of measurements, the 
 
 ##### A. Observation Vector #####
 
