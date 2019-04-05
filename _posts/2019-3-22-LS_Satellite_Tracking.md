@@ -56,9 +56,7 @@ In this application of least squares, the estimated parameters will be providing
 
 ##### A. Observation Vector #####
 
-There are various approaches to measuring a satellite’s position from a ground station, but in this application, it can be assumed the ground station of interest measures relative satellite azimuth $\beta$, elevation $el$, and range $\rho$ from a central point on the sensor as described in Figure 1.
-
-## Picture of Satellite with caption ##
+There are various approaches to measuring a satellite’s position from a ground station, but in this application, it can be assumed the ground station of interest measures relative satellite azimuth $\beta$, elevation $el$, and range $\rho$ from a central point on the sensor as described in Figure 1. ![Fig 1. Ground Station Measurements of Orbiting Satellite]({{ site.baseurl }}/images/satellite_fig.PNG "Fig 1. Ground Station Measurements of Orbiting Satellite")
 
 Previously it was shown that for a linear approximation of a nonlinear system, the observation vector is composed of residual values, meaning that the difference of each measurement from the nominal estimate is used to construct the observation vector. Since the satellite is actively moving over time, incremental measurements from the starting epoch time $t_0$ are summed to time $t_i$ to create the residual observation matrix.
 
@@ -93,9 +91,9 @@ With the observation, model, and parameter terms defined, linear least squares c
 
 ## Application ##
 
-The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes. ![Fig 1. GEOS-III Tracking Data Provided by Ground Station]({{ site.baseurl }}/images/geos_iii_data.png "Fig 1. GEOS-III Tracking Data Provided by Ground Station")
+The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes. ![Fig 1. GEOS-III Tracking Data Provided by Ground Station]({{ site.baseurl }}/images/geos_iii_data.PNG "Fig 1. GEOS-III Tracking Data Provided by Ground Station")
 
-An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2. ![Fig 2. Convergence of least squares estimate over ten iterations. ]({{ site.baseurl }}/images/nls_satellite_iters.png "Fig 2. Convergence of least squares estimate over ten iterations.")
+An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2. ![Fig 2. Convergence of least squares estimate over ten iterations. ]({{ site.baseurl }}/images/nls_satellite_iters.PNG "Fig 2. Convergence of least squares estimate over ten iterations.")
 
 It is shown by the figure that the position error magnitude quickly converges after only four iterations of applying the least squares correction. With an initial position error magnitude of 250 kilometers from the propagated estimate, the least squares estimated state converges to a position error magnitude of 1.2 kilometers, greatly improving the monitoring ground station’s ability to determine any necessary corrections for the satellite.
 
