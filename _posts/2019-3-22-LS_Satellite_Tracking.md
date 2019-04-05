@@ -72,11 +72,13 @@ $$
 
 These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [[^3]].
 
+#### Update with Analytic Technique for Calculating Jacobian from Oribt Propagation ####
+
 ## Implementation ##
 
 With the observation, model, and parameter terms defined, linear least squares can be used to improve the initial satellite state estimate. An algorithm to implement this approach consists of the following:
 * For each measurement taken from $t_0$ to $t_i$:
-  * Compute the residual observation matrix by differencing the measurement and nominal estimate.
+  * Compute the residual observation matrix by differencing each measurement with the nominal estimate.
   * Compute the model Jacobian A using analytical propagation techniques.
   * Sum each observation matrix and model matrix for every measurement to $t_i$.
 * Compute the estimated state correction term $\delta{x}$ by solving the least squares problem $\boldsymbol{A}^{T}\boldsymbol{A}x=\boldsymbol{A}^{T}\boldsymbol{b}$ using the cumulative observation and model matrices.
