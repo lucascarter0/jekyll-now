@@ -43,7 +43,7 @@ $$
 Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the measurement matrix of residual error and the estimated paramaters are related by a Jacobian matrix. The Gauss-Newton algorithm solves the non-linear least squares problem:
 
 $$ 
-\ \Delta\boldsymbol{x}_i \approx (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\delta{\boldsymbol{y}_i}  \\
+\ \Delta\boldsymbol{x}_i \approx (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\Delta{\boldsymbol{y}_i}  \\
 $$
 
 It's important to note that the estimated parameters will be correcting the nominal estimate, whereas the linear least squares example solves for the parameters directly. Using a sample of measurements, the 
@@ -72,7 +72,7 @@ $$
 
 These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [[^3]].
 
-#### Update with Analytic Technique for Calculating Jacobian from Oribt Propagation ####
+### Update with Analytic Technique for Calculating Jacobian from Oribt Propagation ###
 
 ## Implementation ##
 
