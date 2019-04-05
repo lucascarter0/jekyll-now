@@ -20,15 +20,11 @@ $$ \boldsymbol{x} = \begin{bmatrix}r_I\\r_J\\r_K\\r_I\\r_J\\r_K\end{bmatrix} $$
 
 This section describes the construction of each element of the least squares approach for estimating the satellite state at a specified time $t_0$, including definition of ground measurements composing the observation vector and analytic techniques for construction of the model matrix. Derivation of the underlying transformations from inertial to relative coordinates is not of interest in the context of this report, but it should be noted that the relationship between the satellite’s inertial state and ground-based measurements is nonlinear. To account for this, an approximation is made regarding the system dynamics so that linear least squares may be used.
 
-Consider a linear system of the form
-
-$$ \boldsymbol{y} = \boldsymbol{A}\boldsymbol{x} $$
-
-where $y$ represents a size p x 1 column matrix of observation data, $x$ represents a q x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a p x q matrix of the system model relating parameters of interest to the observed data. The least squares method seeks to minimize the residual error between the estimated parameters and the observed data.
+In a linear system, the least squares method seeks to minimize the residual error between estimated parameters and observed data.
 
 $$ min f(x) = \|\| \boldsymbol{A}\boldsymbol{x} - \boldsymbol{y} \|\|_2 $$
 
-Noble and Daniel [[^2]] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
+where $y$ represents a size p x 1 column matrix of observation data, $x$ represents a q x 1 column matrix of estimated parameters (the satellite state in this instance), and $A$ represents a p x q matrix of the system model relating parameters of interest to the observed data. Noble and Daniel [[^2]] derive that the estimated parameters $x$ minimize the residual error if and only if $x$ solves
 
 $$ \boldsymbol{A}^{T}\boldsymbol{A}\boldsymbol{x} = \boldsymbol{A}^{T}\boldsymbol{y} $$
 
@@ -91,7 +87,7 @@ With the observation, model, and parameter terms defined, linear least squares c
 
 ## Application ##
 
-The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes. ![Fig 1. GEOS-III Tracking Data Provided by Ground Station]({{ site.baseurl }}/images/geos_iii_data.PNG "Fig 1. GEOS-III Tracking Data Provided by Ground Station")
+The utility of this approach is demonstrated using a sample set of eighteen measurements taken of a GEOS-III weather satellite during a period of high visibility, lasting approximately five minutes. ![Fig 2. GEOS-III Tracking Data Provided by Ground Station]({{ site.baseurl }}/images/geos_iii_data.PNG "Fig 2. GEOS-III Tracking Data Provided by Ground Station")
 
 An initial estimate of the satellite’s state was provided based on high fidelity propagation methods, but error from the propagation methods was corrected using the least squares method and the data provided in Table 1. The least squares method described previously was used to calculate a correction to the nominal state estimate. This process was repeated for ten iterations to analyze the least squares method’s convergence to an estimated state. In this application, the estimated satellite position was compared against a known true satellite position to calculate a position error magnitude. The results of these iterations are shown in Figure 2. ![Fig 2. Convergence of least squares estimate over ten iterations. ]({{ site.baseurl }}/images/nls_satellite_iters.PNG "Fig 2. Convergence of least squares estimate over ten iterations.")
 
