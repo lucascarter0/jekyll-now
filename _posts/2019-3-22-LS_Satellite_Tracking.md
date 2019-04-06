@@ -43,7 +43,7 @@ $$
 Arranged in this form, the first-order Taylor series approximation still resembles the least squares problem, where the measurement matrix of residual error and the estimated paramaters are related by a Jacobian matrix. The Gauss-Newton algorithm solves the non-linear least squares problem:
 
 $$ 
-\ \Delta\boldsymbol{x}_i \approx (\boldsymbol{J}(\boldsymbol{x})^{T}\boldsymbol{J}(\boldsymbol{x}))^{-1}\boldsymbol{J}(\boldsymbol{x})^{T}\Delta{\boldsymbol{y}_i}  \\
+\ \Delta\boldsymbol{x}_i \approx (\boldsymbol{J}(\boldsymbol{x}_{0})^{T}\boldsymbol{J}(\boldsymbol{x}_{0}))^{-1}\boldsymbol{J}(\boldsymbol{x}_{0})^{T}\Delta{\boldsymbol{y}_i}  \\
 $$
 
 It's important to note that the estimated parameters will be correcting the nominal estimate, whereas the linear least squares example solves for the parameters directly. Using a sample of measurements, the 
@@ -72,7 +72,7 @@ $$
 
 These partial derivatives can be approximated analytically by perturbing each element of the nominal state estimate and propagating the perturbed state to time $t_i$. These methods are discussed at length by Vallado [[^3]].
 
-### Update with Analytic Technique for Calculating Jacobian from Orbit Propagation ###
+##### Detail Analytic Technique for Calculating Jacobian from Orbit Propagation #####
 
 ## Implementation ##
 
@@ -95,8 +95,12 @@ It is shown by the figure that the position error magnitude quickly converges af
 
 ## Conclusion ##
 
-  While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result. One of the most significant assumptions of approximating a nonlinear system is that the nominal estimate cannot deviate too greatly from the computed state. This means that the satellite state initial estimate must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge from the true state. 
-  Another important assumption concerns measurement accuracy and state model accuracy. In this example, all measurements were assumed to provide a perfectly accurate relative position of the satellite. However, physical sensor measurements contain a certain level of uncertainty, the analytical methods used to obtain the model matrix contain uncertainty, and the first-order approximation of the system contains uncertainty. These uncertainties must be accounted for by including the unknown behavior of each term in the system in the form of random variables and measurement weighting [[^4]]. When system uncertainties are quantified by Gaussian random variables, the uncertainty of each measurement can be used to determine an optimal correction to the nominal state estimate in a technique known as Kalman filtering [[^5]]. 
+  While the least squares approach was shown to significantly improve the estimated parameter accuracy for a nonlinear system, several assumptions are necessary to create this result:
+  
+* The nominal estimate $x_{0}$ cannot deviate too greatly from the computed state. This means that the initial estimate of the satellite's state must be within a reasonable tolerance of the measured values, or the least squares estimate will quickly diverge.
+* All measurements are treated as true measurements of the satellite state. This can cause poor convergence when using sensor measurements with a high degree of uncertainty. 
+* The analytical methods used to obtain the model matrix and the first-order approximation of the system are assumed to contain a negligible amount of error. These uncertainties can be accounted for by weighting each coefficient being solved in the least squares problem [[^4]], or by quantifying system uncertainties by Gaussian random variables and weighting the nominal estimate against the least squares estimate through a Kalman filter [[^5]]. 
+  
   As shown in this report, linear least squares estimation provides a viable approach to estimating a satellite’s position and velocity at a specified time based on ground-based relative measurements. The nonlinear system relationship between inertial state and relative measurements can be represented by a first-order Taylor series approximation to apply iterative corrections to a nominal state estimate. It was also shown that while some state position error remained after ten iterations of the differential correction technique, linear least squares provided an effective method for greatly improving the propagation-only state estimate.
 
 [^1]: Chen, Bai, Liang, Li, Orbital Data Applications for Space Objects, Springer, Singapore, 2017, Ch 2.
