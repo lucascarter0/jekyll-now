@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Satellite Orbit Determination Using Least Squares
-permalink: /homework/
+permalink: /homework/satellite_least_squares
 ---
 
 This problem is based on a report I wrote recently for a graduate linear algebra course. It describes a differential-correction technique for estimating a satellite's position and velocity from measurements taken from a ground-based radar station. Since the context of the paper was to address the linear algebra portion of the problem, emphasis is given to the least squares method used to process the ground measurements, and less emphasis to modeling the orbital mecahnics of satellite motion. The report used data and orbital mechanics models from Fundamentals of Astrodynamics and Applications by David Vallado.
