@@ -1,5 +1,4 @@
 ---
----
 layout: post
 title: Air Vehicle Simulation in Python
 permalink: /code/6dof_python
